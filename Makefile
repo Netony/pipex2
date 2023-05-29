@@ -6,7 +6,7 @@
 #    By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:00:32 by dajeon            #+#    #+#              #
-#    Updated: 2023/05/29 12:45:28 by dajeon           ###   ########.fr        #
+#    Updated: 2023/05/29 13:19:05 by dajeon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ LDFLAGS = -L $(LIB_DIR) $(LIB_DIR2)
 # Commands ******************************************************************* #
 
 all : $(NAME)
-	./a.out here_doc EOF "ls -al" "cat -e" "cat -e" outfile
+	./a.out infile "ls -al" "cat -e" "cat -e" outfile
 
 clean :
 	$(RM) $(RMFLAGS) $(OBJ_DIR) */*.a */*.o */*/*.o
