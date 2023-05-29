@@ -6,12 +6,12 @@
 #    By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:00:32 by dajeon            #+#    #+#              #
-#    Updated: 2023/05/27 21:12:02 by dajeon           ###   ########.fr        #
+#    Updated: 2023/05/29 12:45:28 by dajeon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
-SOURCES = main.c
+SOURCES = main.c ft_execve_path.c ft_error.c ft_parser.c
 INCLUDES = 
 
 LIBFT = libft.a
@@ -60,7 +60,7 @@ LDFLAGS = -L $(LIB_DIR) $(LIB_DIR2)
 # Commands ******************************************************************* #
 
 all : $(NAME)
-	./a.out here_doc EOF "ls -al" "cat -e" outfile
+	./a.out here_doc EOF "ls -al" "cat -e" "cat -e" outfile
 
 clean :
 	$(RM) $(RMFLAGS) $(OBJ_DIR) */*.a */*.o */*/*.o

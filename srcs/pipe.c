@@ -19,7 +19,6 @@ int	pipe(void)
 		else
 		{
 			dup2(pfd[0], 1);
-			break ;
 		}
 	}
 }
