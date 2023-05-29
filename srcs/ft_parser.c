@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:00:44 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/29 13:23:19 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/05/29 21:29:29 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,9 @@
 
 int	ft_files(int argc, char **argv, int *count, int ffd[2])
 {
-	char	*join;
-
 	if (ft_strncmp(argv[1], "here_doc", -1) == 0)
 	{
-		join = ft_strjoin(argv[2], "\n");
-		while (ft_strncmp(get_next_line(0), join, -1))
-			;
-		free(join);
-		ffd[0] = 0;
+		ffd[0] = ft_here_doc(argv);
 		ffd[1] = open(argv[argc - 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
 		*count = 3;
 	}
@@ -32,9 +26,13 @@ int	ft_files(int argc, char **argv, int *count, int ffd[2])
 		ffd[1] = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		*count = 2;
 	}
-	if (ffd[0] < 0 || ffd[1] < 0)
-		return (-1);
-	return (0);
+	if (ffd[0] >= 0 && ffd[1] >= 0)
+		return (0);
+	if (ffd[0] < 0)
+		perror(argv[1]);
+	if (ffd[1] < 0)
+		perror(argv[argc - 1]);
+	return (-1);
 }
 
 char	***ft_commands(char **argv, int start, int end)
@@ -48,4 +46,28 @@ char	***ft_commands(char **argv, int start, int end)
 		commands[i++] = ft_split(argv[start++], ' ');
 	commands[i] = NULL;
 	return (commands);
+}
+
+int	ft_here_doc(char **argv)
+{
+	char	*join;
+	char	*buf;
+	int		fd;
+
+	join = ft_strjoin(argv[2], "\n");
+	fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	while (1)
+	{
+		buf = get_next_line(0);
+		if (ft_strncmp(buf, join, -1))
+		{
+			ft_putstr_fd(buf, fd);
+			printf("%s", buf);
+		}
+		else
+			break ;
+	}
+	close(fd);
+	fd = open(".here_doc", O_RDONLY);
+	return (fd);
 }

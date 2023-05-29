@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 09:56:53 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/29 12:14:32 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/05/29 21:19:08 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,11 @@ int		ft_execve_path(char **command, char **envp);
 
 void	ft_freel_strs(char **strs, int len);
 void	ft_error_malloc(char *name);
+void	ft_perror(void);
 
+int		ft_strsslen(char ***strss);
+int		ft_here_doc(char **argv);
+
+void	ft_print_strss(char ***strss);
+void	ft_print_strs(char **strs);
 #endif
