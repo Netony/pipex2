@@ -6,13 +6,13 @@
 #    By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:00:32 by dajeon            #+#    #+#              #
-#    Updated: 2023/05/30 16:57:06 by dajeon           ###   ########.fr        #
+#    Updated: 2023/05/30 18:32:35 by dajeon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-SOURCES = main.c ft_pipe.c ft_execve_path.c ft_error.c ft_parser.c pipex_utils.c
-INCLUDES = 
+SOURCES = pipex.c ft_pipe.c ft_execve_path.c ft_error.c ft_parser.c ft_pipex_utils.c
+SOURCES_BONUS = pipex_bonus.c ft_pipe_bonus.c ft_execve_path_bonus.c ft_error_bonus.c ft_parser_bonus.c ft_pipex_utils_bonus.c
 
 LIBFT = libft.a
 LIBFTPRINTF = libftprintf.a
@@ -29,13 +29,20 @@ LIB_DIR3 = get_next_line
 
 # **************************************************************************** #
 
-SRCS = $(SOURCES)
-OBJS = $(SOURCES:.c=.o)
 INCS = $(INCLUDES)
 LDLIBS = -l $(LIB) $(LIB2) $(LIB3)
 
-SRC_DIR = srcs
-OBJ_DIR = objs
+ifdef WITH_BONUS
+	SRC_DIR = srcs_bonus
+	OBJ_DIR = objs_bonus
+	SRCS = $(SOURCES_BONUS)
+	OBJS = $(SOURCES_BONUS:.c=.o)
+else
+	SRC_DIR = srcs
+	OBJ_DIR = objs
+	SRCS = $(SOURCES)
+	OBJS = $(SOURCES:.c=.o)
+endif
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS := $(addprefix $(OBJ_DIR)/, $(OBJS))
@@ -60,10 +67,13 @@ LDFLAGS = -L $(LIB_DIR) $(LIB_DIR2)
 # Commands ******************************************************************* #
 
 all : $(NAME)
+
+bonus :
+	make WITH_BONUS=1 $(NAME)
 	./$(NAME) here_doc EOF "cat -e" "cat -e" outfile
 
 clean :
-	$(RM) $(RMFLAGS) $(OBJ_DIR) */*.a */*.o */*/*.o
+	$(RM) $(RMFLAGS) objs objs_bonus */*.a */*.o */*/*.o
 
 fclean : 
 	$(MAKE) clean

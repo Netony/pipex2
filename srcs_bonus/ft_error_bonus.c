@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_error_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 11:58:17 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 18:13:34 by dajeon           ###   ########.fr       */
+/*   Created: 2023/05/30 17:59:00 by dajeon            #+#    #+#             */
+/*   Updated: 2023/05/30 18:34:36 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	ft_perror_malloc(char *name)
 {
@@ -18,12 +18,16 @@ void	ft_perror_malloc(char *name)
 	ft_putendl_fd(": Mallocation failed", 2);
 }
 
-void	ft_perror_var(char *name, int nbr)
+void	ft_perror_nevar(char *name, int nbr, int here_doc)
 {
 	ft_putstr_fd(name, 2);
-	ft_putstr_fd(": Need exactly 4 variables. You: ", 2);
+	ft_putstr_fd(": Need at lest", 2);
+	if (here_doc > 0)
+		ft_putnbr_fd(5, 2);
+	else
+		ft_putnbr_fd(4, 2);
+	ft_putstr_fd(" variable. You: ", 2);
 	ft_putnbr_fd(nbr, 2);
-	ft_putendl_fd("", 2);
 }
 
 void	ft_strs_lfree(char **strs, int len)

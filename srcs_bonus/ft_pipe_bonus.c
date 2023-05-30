@@ -1,52 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_pipe_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 17:14:27 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 17:15:27 by dajeon           ###   ########.fr       */
+/*   Created: 2023/05/30 17:59:15 by dajeon            #+#    #+#             */
+/*   Updated: 2023/05/30 17:59:16 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_print_strs(char **strs)
+#include "pipex_bonus.h"
+
+int	ft_pipe(char ***cmds, char **envp, int f_fd[2], int size)
 {
-	int	i;
+	int		p_fd[2];
+	int		j;
 
-	i = 0;
-	while (strs[i])
+	dup2(f_fd[0], 0);
+	j = 0;
+	while (j < size)
 	{
-		printf("strs[%d]: %s\n", i, strs[i]);
-		i++;
-	}
-}
-
-void	ft_print_strss(char ***strss)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (strss[i])
-	{
-		j = 0;
-		while (strss[i][j])
+		pipe(p_fd);
+		if (fork() == 0)
 		{
-			printf("cmds[%d][%d]: %s\n", i, j, strss[i][j]);
-			j++;
+			close(p_fd[0]);
+			if (j == size - 1)
+				dup2(f_fd[1], 1);
+			else
+				dup2(p_fd[1], 1);
+			if (ft_execve_path(cmds[j], envp) < 0)
+				return (-1);
 		}
-		i++;
+		close(p_fd[1]);
+		dup2(p_fd[0], 0);
+		j++;
 	}
-	printf("SUCCESS\n");
-}
-
-int	ft_strsslen(char ***strss)
-{
-	int	len;
-
-	len = 0;
-	while (strss[len])
-		len++;
-	return (len);
+	return (j);
 }

@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 21:58:34 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 17:22:33 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:54 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	main(int argc, char **argv, char **envp)
 	int		f_fd[2];
 	char	***cmds;
 
-	if (ft_files(argc, argv, &i, f_fd) < 0)
+	if (ft_files(argc, argv, f_fd) < 0)
 		exit(EXIT_FAILURE);
-	cmds = ft_commands(argv, i, argc - 1);
+	cmds = ft_commands(argv, 2, argc - 1);
 	if (cmds == NULL)
 		exit(EXIT_FAILURE);
 	size = ft_strsslen(cmds);
 	if (ft_pipe(cmds, envp, f_fd, size) < 0)
 		exit(EXIT_FAILURE);
-	ft_freel_strss(cmds, 0);
+	ft_strss_lfree(cmds, 0);
 	i = 0;
 	while (i++ < size)
 	{
@@ -37,6 +37,5 @@ int	main(int argc, char **argv, char **envp)
 			exit(EXIT_FAILURE);
 		}
 	}
-	system("leaks pipex");
 	return (0);
 }
