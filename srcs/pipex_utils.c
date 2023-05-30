@@ -6,13 +6,13 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:59:03 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/29 21:19:55 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:18:03 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int		ft_strsslen(char ***strss)
+int	ft_strsslen(char ***strss)
 {
 	int	len;
 
@@ -29,7 +29,7 @@ int	ft_print_ints(int *n, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		if (printf("%d, ", n[i++]) < 0)
+		if (ft_printf("%d, ", n[i++]) < 0)
 			return (0);
 	}
 	return (1);
@@ -44,10 +44,10 @@ void	ft_print_strss(char ***strss)
 	while (*strss)
 	{
 		j = 0;
-		printf("strss[%d]: ", i++);
+		ft_printf("strss[%d]: ", i++);
 		while ((*strss)[j])
-			printf("%s, ", (*strss)[j++]);
-		printf("\n");
+			ft_printf("%s, ", (*strss)[j++]);
+		ft_printf("\n");
 		strss++;
 	}
 }
@@ -59,9 +59,8 @@ void	ft_print_strs(char **strs)
 	i = 0;
 	while (*strs)
 	{
-		printf("%s, ", strs[i++]);
+		ft_printf("%s, ", strs[i++]);
 		strs++;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
-
