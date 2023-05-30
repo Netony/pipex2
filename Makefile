@@ -6,7 +6,7 @@
 #    By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:00:32 by dajeon            #+#    #+#              #
-#    Updated: 2023/05/30 18:32:35 by dajeon           ###   ########.fr        #
+#    Updated: 2023/05/30 18:49:32 by dajeon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,6 @@ all : $(NAME)
 
 bonus :
 	make WITH_BONUS=1 $(NAME)
-	./$(NAME) here_doc EOF "cat -e" "cat -e" outfile
 
 clean :
 	$(RM) $(RMFLAGS) objs objs_bonus */*.a */*.o */*/*.o
