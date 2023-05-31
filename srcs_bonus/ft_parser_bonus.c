@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:59:10 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 18:35:54 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/05/31 17:40:45 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	ft_files(int argc, char **argv, int *count, int ffd[2])
 	if (!(ffd[0] < 0) && !(ffd[1] < 0) && !(argc - 1 - *count < 2))
 		return (0);
 	else if (argc - 1 - *count < 2)
-		ft_perror_nevar("pipex", 2 - argc - 1 - *count, ft_strncmp(argv[1], "here_doc", -1) == 0);
+		ft_perror_nevar("pipex", 2 - argc - 1 - *count, \
+				ft_strncmp(argv[1], "here_doc", -1) == 0);
 	else if (ffd[0] < 0)
 		ft_perror("pipex", argv[1]);
 	else if (ffd[1] < 0)
