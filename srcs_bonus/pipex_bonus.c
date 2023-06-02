@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:59:25 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 18:45:29 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/02 21:32:25 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,26 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		i;
 	int		size;
-	int		f_fd[2];
 	char	***cmds;
+	int		ret;
+	int	pid;
 
-	if (ft_files(argc, argv, &i, f_fd) < 0)
-		exit(EXIT_FAILURE);
+	i = ft_move_arg(argc, argv);
 	cmds = ft_commands(argv, i, argc - 1);
 	if (cmds == NULL)
 		exit(EXIT_FAILURE);
 	size = ft_strsslen(cmds);
-	if (ft_pipe(cmds, envp, f_fd, size) < 0)
-		exit(EXIT_FAILURE);
+	pid = ft_pipe(cmds, argc, argv, envp, size);
 	ft_strss_lfree(cmds, 0);
+	if (ft_check_here_doc(argv))
+		unlink(".here_doc");
 	i = 0;
 	while (i++ < size)
 	{
 		if (wait(NULL) == -1)
 			exit(EXIT_FAILURE);
+		if (i == size)
+			waitpid(pid, &ret, 0);
 	}
-	return (0);
+	return (ret);
 }

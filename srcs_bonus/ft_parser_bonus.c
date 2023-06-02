@@ -6,38 +6,27 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:59:10 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/31 17:40:45 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/02 21:34:54 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-static int	ft_here_doc(char **argv);
-
-int	ft_files(int argc, char **argv, int *count, int ffd[2])
+int	ft_move_arg(int argc, char **argv)
 {
-	if (ft_strncmp(argv[1], "here_doc", -1) == 0)
+	int	start;
+	int	num_cmd;
+
+	start = 2;
+	if (ft_check_here_doc(argv))
+		start++;
+	num_cmd = (argc - 1) - start;
+	if (num_cmd < 2)
 	{
-		ffd[0] = ft_here_doc(argv);
-		ffd[1] = open(argv[argc - 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
-		*count = 3;
+		ft_perror_nevar("pipex", argc - 1, ft_check_here_doc(argv));
+		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		ffd[0] = open(argv[1], O_RDONLY);
-		ffd[1] = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		*count = 2;
-	}
-	if (!(ffd[0] < 0) && !(ffd[1] < 0) && !(argc - 1 - *count < 2))
-		return (0);
-	else if (argc - 1 - *count < 2)
-		ft_perror_nevar("pipex", 2 - argc - 1 - *count, \
-				ft_strncmp(argv[1], "here_doc", -1) == 0);
-	else if (ffd[0] < 0)
-		ft_perror("pipex", argv[1]);
-	else if (ffd[1] < 0)
-		ft_perror("pipex", argv[argc - 1]);
-	return (-1);
+	return (start);
 }
 
 char	***ft_commands(char **argv, int start, int end)
@@ -67,31 +56,11 @@ char	***ft_commands(char **argv, int start, int end)
 	return (commands);
 }
 
-static int	ft_here_doc(char **argv)
-{
-	char	*join;
-	char	*buf;
-	int		fd;
 
-	join = ft_strjoin(argv[2], "\n");
-	fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	while (fd)
-	{
-		buf = get_next_line(0);
-		if (ft_strncmp(buf, join, -1))
-			ft_putstr_fd(buf, fd);
-		else
-		{
-			free(buf);
-			break ;
-		}
-		free(buf);
-	}
-	free(join);
-	if (fd < 0)
-		return (-1);
-	close(fd);
-	fd = open(".here_doc", O_RDONLY);
-	unlink(".here_doc");
-	return (fd);
+int	ft_check_here_doc(char **argv)
+{
+	if (ft_strncmp(argv[1], "here_doc", -1) == 0)
+		return (1);
+	else
+		return (0);
 }

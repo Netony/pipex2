@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:58:48 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 18:35:20 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/02 21:30:46 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # include <errno.h>
 # include "lib_bonus.h"
 
-int		ft_files(int argc, char **argv, int *count, int ffd[2]);
+int		ft_move_arg(int argc, char **argv);
 char	***ft_commands(char **argv, int start, int end);
+int		ft_check_here_doc(char **argv);
 
-int		ft_pipe(char ***cmds, char **envp, int f_fd[2], int size);
+int		ft_pipe(char ***cmds, int argc, char **argv, char **envp, int size);
 int		ft_execve_path(char **command, char **envp);
 
 void	ft_strs_lfree(char **strs, int len);

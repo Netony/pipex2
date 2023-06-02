@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:59:06 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 18:27:47 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/02 21:27:01 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	ft_execve_path(char **command, char **envp)
 
 	pathes = ft_make_pathes(envp);
 	i = 0;
-	if (execve(command[0], command, envp) < 0)
-		;
 	while (pathes[i])
 	{
 		cmd = ft_strjoin_t(pathes[i], "/", command[0]);
@@ -36,6 +34,8 @@ int	ft_execve_path(char **command, char **envp)
 		i++;
 	}
 	ft_strs_lfree(pathes, i);
+	if (execve(command[0], command, envp) < 0)
+		;
 	ft_putstr_fd("pipex: command not found: ", 2);
 	ft_putendl_fd(command[0], 2);
 	return (-1);
