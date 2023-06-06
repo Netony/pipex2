@@ -6,21 +6,19 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:01:45 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 16:40:30 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:13:44 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	ft_pipe(char ***cmds, int argc, char **argv, char **envp)
+int	ft_pipe(char ***cmds, int argc, char **argv, char **envp, int size)
 {
 	int		pfd[2];
 	int		pid;
 	int		i;
-	int		size;
 
 	i = 0;
-	size = ft_strsslen(cmds);
 	while (i < size)
 	{
 		if (i != size - 1)

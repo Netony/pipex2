@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:59:36 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 16:40:29 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:13:05 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	main(int argc, char **argv, char **envp)
 	cmds = ft_commands(argv, i, argc - 1);
 	if (cmds == NULL)
 		exit(EXIT_FAILURE);
+	size = ft_strsslen(cmds);
 	pid = ft_pipe(cmds, argc, argv, envp, size);
 	ft_strss_lfree(cmds, 0);
 	i = 0;
-	size = ft_strsslen(cmds);
 	waitpid(pid, &ret, 0);
 	while (i++ < size - 1)
 	{

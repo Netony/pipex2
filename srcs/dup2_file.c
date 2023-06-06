@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:44:42 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 15:35:46 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:43:01 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_dup2_here_doc(char *limiter, int fd)
 	while (ffd)
 	{
 		line = get_next_line(0);
-		if (ft_strncmp(line, join, -1))
+		if (ft_strncmp(line, join, -1) == 0)
 			break ;
 		write(ffd, line, ft_strlen(line));
 	}
@@ -76,5 +76,6 @@ int	ft_dup2_here_doc(char *limiter, int fd)
 	ffd = open(".here_doc", O_RDONLY);
 	dup2(ffd, fd);
 	unlink(".here_doc");
+	printf("fuck you\n");
 	return (0);
 }

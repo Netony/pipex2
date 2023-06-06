@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:59:52 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 16:31:10 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:19:27 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int		ft_move_arg(int *pointer, int argc, char **argv);
 char	***ft_commands(char **argv, int start, int end);
 
-int		ft_pipe(char ***cmds, int argc, char **argv, char **envp);
+int		ft_pipe(char ***cmds, int argc, char **argv, char **envp, int size);
 int		ft_execve_path(char **command, char **envp);
 
 void	ft_strs_lfree(char **strs, int len);

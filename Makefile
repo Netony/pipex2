@@ -6,14 +6,14 @@
 #    By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:00:32 by dajeon            #+#    #+#              #
-#    Updated: 2023/06/06 16:08:53 by dajeon           ###   ########.fr        #
+#    Updated: 2023/06/06 17:14:16 by dajeon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 SOURCES = ft_execve_path.c \
 		  error.c parser.c free.c dup2_file.c dup2_pipe.c \
-		  pipex_utils.c
+		  pipex_utils.c redirect.c
 SOURCES_TESTS = test.c
 SOURCES_MANDA = pipex.c ft_pipe.c 
 SOURCES_BONUS = pipex_bonus.c ft_pipe_bonus.c parser_bonus.c error_bonus.c

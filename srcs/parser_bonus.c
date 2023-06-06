@@ -6,11 +6,10 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 15:54:17 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 16:05:55 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:20:17 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
 #include "pipex_bonus.h"
 
 int	ft_move_arg_bonus(int *pointer, int argc, char **argv)
