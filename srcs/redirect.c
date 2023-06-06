@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib_bonus.h                                        :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 17:59:21 by dajeon            #+#    #+#             */
-/*   Updated: 2023/05/30 17:59:22 by dajeon           ###   ########.fr       */
+/*   Created: 2023/06/06 16:27:24 by dajeon            #+#    #+#             */
+/*   Updated: 2023/06/06 16:28:54 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_BONUS_H
+#include "pipex.h"
 
-# include "../libft/libft.h"
-# include "../get_next_line/sources/get_next_line_bonus.h"
-# include "../ft_printf/sources/ft_printf.h"
-
-#endif
+int	ft_redirect(int i, int pfd[2], char *infile, char *outfile, int size)
+{
+	if (i == 0)
+	{
+		if (ft_dup2_infile(infile, 0) < 0)
+			exit(EXIT_FAILURE);
+		ft_dup2_pipe_write(pfd);
+	}
+	else if (i == size - 1)
+		ft_dup2_outfile(outfile, 1);
+	else
+		ft_dup2_pipe_write(pfd);
+	return (0);
+}
