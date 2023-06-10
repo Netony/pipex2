@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 15:55:21 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 17:20:29 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/10 17:47:01 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ void	ft_perror_arg_bonus(char *name, int cur, int need)
 	ft_putnbr_fd(cur, 2);
 	ft_putendl_fd("", 2);
 }
-

@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_create_commands.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 19:59:36 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/10 19:59:31 by dajeon           ###   ########.fr       */
+/*   Created: 2023/06/10 19:20:13 by dajeon            #+#    #+#             */
+/*   Updated: 2023/06/10 19:20:54 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+char	***ft_create_commands(char **argv, int start, int end)
 {
+	char	***commands;
 	int		i;
-	int		size;
-	char	***cmds;
-	int		pid;
 
-	if (ft_move_arg(&i, argc, argv) < 0)
-		exit(EXIT_FAILURE);
-	cmds = ft_create_commands(argv, i, argc - 1);
-	if (cmds == NULL)
-		exit(EXIT_FAILURE);
-	size = ft_command_size(argc, argv);
-	pid = ft_pipe(cmds, argc, argv, envp);
-	ft_strss_lfree(cmds, size);
 	i = 0;
-	while (i++ < size)
+	commands = (char ***)malloc(sizeof(char **) * (end - start + 1));
+	if (commands == NULL)
 	{
-		if (wait(NULL) == -1)
-			exit(EXIT_FAILURE);
+		ft_perror_malloc("pipex");
+		return (NULL);
+	}		
+	while (start < end)
+	{
+		commands[i] = ft_split(argv[start++], ' ');
+		if (commands[i] == NULL)
+		{
+			ft_perror_malloc("pipex");
+			ft_strss_lfree(commands, i);
+			return (NULL);
+		}
+		i++;
 	}
-	return (0);
+	commands[i] = NULL;
+	return (commands);
 }

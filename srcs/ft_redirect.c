@@ -1,49 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/10 21:37:13 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/10 21:37:14 by dajeon           ###   ########.fr       */
+/*   Created: 2023/06/10 17:02:57 by dajeon            #+#    #+#             */
+/*   Updated: 2023/06/10 20:21:53 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_strs_lfree(char **strs, int len)
+int	ft_redirect(int i, int argc, char **argv, int pfd[2])
 {
-	int	i;
+	int	size;
 
-	i = 0;
-	if (len > 0)
+	size = ft_command_size(argc, argv);
+	if (i == 0)
 	{
-		while (i < len)
-			free(strs[i++]);
+		if (ft_dup2_infile(argv[1], 0) < 0)
+			exit(EXIT_FAILURE);
 	}
+	if (i == size - 1)
+		ft_dup2_outfile(argv[argc - 1], 1, pfd);
 	else
-	{
-		while (strs[i])
-			free(strs[i++]);
-	}
-	free(strs);
-}
-
-void	ft_strss_lfree(char ***strss, int len)
-{
-	int	i;
-
-	i = 0;
-	if (len > 0)
-	{
-		while (i < len)
-			ft_strs_lfree(strss[i++], 0);
-	}
-	else
-	{
-		while (strss[i])
-			ft_strs_lfree(strss[i++], 0);
-	}
-	free(strss);
+		ft_dup2_pipe_write(pfd);
+	return (0);
 }

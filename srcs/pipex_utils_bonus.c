@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 16:27:24 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 17:14:04 by dajeon           ###   ########.fr       */
+/*   Created: 2023/06/10 19:13:13 by dajeon            #+#    #+#             */
+/*   Updated: 2023/06/10 19:34:15 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-int	ft_redirect(int i, int pfd[2], char *infile, char *outfile, int size)
+int	ft_command_size_bonus(int argc, char **argv)
 {
-	if (i == 0)
-	{
-		if (ft_dup2_infile(infile, 0) < 0)
-			exit(EXIT_FAILURE);
-		ft_dup2_pipe_write(pfd);
-	}
-	else if (i == size - 1)
-		ft_dup2_outfile(outfile, 1);
+	return (argc - (3 + ft_check_here_doc(argc, argv)));
+}
+
+int	ft_check_here_doc(int argc, char **argv)
+{
+	if (argc < 2)
+		return (0);
+	if (ft_strncmp(argv[1], "here_doc", -1) == 0)
+		return (1);
 	else
-		ft_dup2_pipe_write(pfd);
-	return (0);
+		return (0);
 }
