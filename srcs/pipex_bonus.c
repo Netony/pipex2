@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:09:09 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/10 21:44:10 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/11 21:08:56 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	char	***cmds;
 	int		pid;
 
+	i = 0;
 	if (ft_move_arg_bonus(&i, argc, argv) < 0)
 		exit(EXIT_FAILURE);
 	cmds = ft_create_commands(argv, i, argc - 1);
