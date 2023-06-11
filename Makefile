@@ -6,17 +6,16 @@
 #    By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:00:32 by dajeon            #+#    #+#              #
-#    Updated: 2023/06/10 19:38:58 by dajeon           ###   ########.fr        #
+#    Updated: 2023/06/11 21:11:56 by dajeon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-SOURCES = error.c parser.c free.c dup2_file.c dup2_pipe.c \
+SOURCES = error.c free.c dup2_file.c dup2_pipe.c \
 		  ft_execve_path.c ft_create_commands.c
-SOURCES_TESTS = test.c
-SOURCES_MANDA = pipex.c ft_redirect.c ft_pipe.c pipex_utils.c
-SOURCES_BONUS = pipex_bonus.c ft_redirect_bonus.c ft_pipe_bonus.c pipex_utils_bonus.c\
-			   	parser_bonus.c error_bonus.c
+SOURCES_MANDA = pipex.c parser.c ft_redirect.c ft_pipe.c pipex_utils.c
+SOURCES_BONUS = pipex_bonus.c parser_bonus.c ft_redirect_bonus.c ft_pipe_bonus.c pipex_utils_bonus.c \
+			   	error_bonus.c
 
 LIBFT = libft.a
 LIBFTPRINTF = libftprintf.a
