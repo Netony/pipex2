@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 20:01:20 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/06 15:20:59 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:36:54 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**ft_make_pathes(char **envp);
 static char	*ft_strjoin_t(char *a, char *b, char *c);
-static char	*ft_grep(char **envp, char *grep);
+static char	*ft_grep_first(char **envp, char *grep);
 
 int	ft_execve_path(char **command, char **envp)
 {
@@ -24,21 +24,24 @@ int	ft_execve_path(char **command, char **envp)
 
 	pathes = ft_make_pathes(envp);
 	i = 0;
-	while (pathes[i])
+	if (pathes)
 	{
-		cmd = ft_strjoin_t(pathes[i], "/", command[0]);
-		if (cmd == NULL)
-			ft_perror_malloc("pipex");
-		if (execve(cmd, command, envp) < 0)
-			free(cmd);
-		i++;
+		while (pathes[i])
+		{
+			cmd = ft_strjoin_t(pathes[i++], "/", command[0]);
+			if (cmd)
+			{
+				execve(cmd, command, envp);
+				free(cmd);
+			}
+		}
+		ft_strs_lfree(pathes, i);
 	}
 	if (execve(command[0], command, envp) < 0)
 	{
 		ft_perror_command("pipex", command[0]);
 		exit(127);
 	}
-	ft_strs_lfree(pathes, i);
 	return (-1);
 }
 
@@ -58,12 +61,14 @@ static char	**ft_make_pathes(char **envp)
 	char	*grep;
 	char	**pathes;
 
-	grep = ft_grep(envp, "PATH");
+	grep = ft_grep_first(envp, "PATH=");
+	if (grep == NULL)
+		return (NULL);
 	pathes = ft_split(grep + ft_strlen("PATH="), ':');
 	return (pathes);
 }
 
-static char	*ft_grep(char **envp, char *grep)
+static char	*ft_grep_first(char **envp, char *grep)
 {
 	int	i;
 
@@ -72,7 +77,7 @@ static char	*ft_grep(char **envp, char *grep)
 	{
 		while (envp[i])
 		{
-			if (ft_strnstr(envp[i], grep, ft_strlen(envp[i])))
+			if (ft_strncmp(envp[i], grep, ft_strlen(grep)) == 0)
 				return (envp[i]);
 			i++;
 		}
