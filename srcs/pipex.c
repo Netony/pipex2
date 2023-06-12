@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:59:36 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/11 21:08:46 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:23:41 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	int		size;
 	char	***cmds;
 	int		pid;
-	
+
 	i = 0;
 	if (ft_move_arg(&i, argc, argv) < 0)
 		exit(EXIT_FAILURE);

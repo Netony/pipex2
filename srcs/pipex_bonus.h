@@ -6,11 +6,12 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 15:58:48 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/10 21:38:52 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/11 21:19:48 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include "pipex.h"
 

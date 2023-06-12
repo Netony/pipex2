@@ -6,11 +6,12 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:59:52 by dajeon            #+#    #+#             */
-/*   Updated: 2023/06/10 21:38:30 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:15:27 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
+# define PIPEX_H
 
 # include <stdlib.h>
 # include <stdio.h>
