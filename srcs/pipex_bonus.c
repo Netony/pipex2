@@ -28,8 +28,6 @@ int	main(int argc, char **argv, char **envp)
 	size = ft_command_size_bonus(argc, argv);
 	pid = ft_pipe_bonus(cmds, argc, argv, envp);
 	ft_strss_lfree(cmds, 0);
-	if (ft_check_here_doc(argc, argv))
-		unlink(".here_doc");
 	i = 0;
 	while (i++ < size)
 	{
